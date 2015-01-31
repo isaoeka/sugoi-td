@@ -1,0 +1,94 @@
+# tmp
+# -----------------------
+
+*.swp
+*~
+.DS_Store
+
+# project
+# -----------------------
+
+cache/
+bin/
+obj/
+build/
+local.properties
+.gradle/
+*.imi
+proj.android/assets/
+proj.android/bin/
+proj.android/gen/
+proj.android/obj/
+gen/
+out/
+.classpath
+.project
+proj.ios/Build/
+cache/
+
+
+# Framework
+# -----------------------
+
+Classes/Framework/
+Resources/Framework/
+
+# document
+# -----------------------
+
+doc/
+docs/
+
+# Android
+# -----------------------
+
+obj/
+gen/
+bin/
+assets/
+build/
+.idea/# Mac
+.DS_Store
+
+# Xcode
+build/*
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+*.xcworkspace
+!default.xcworkspace
+xcuserdata
+profile
+*.moved-aside
+
+#CocoaPod
+Pods/*
+
+#IDEA
+.idea/*
+
+#cocos2d-x
+bin/
+obj/
+assets/
+gen/
+out/
+.classpath
+.project
+.cproject
+*.so
+
+#JAVA
+*.class
+
+# gradle
+.gradle/
+
+# Android Studio
+.idea/
+*.iml
