@@ -40,7 +40,7 @@ bool StartPageScene::init()
     menu->setPosition(Vec2::ZERO);
     this->addChild(menu, 1);
 
-    auto label = Label::createWithTTF("スタートページ", "fonts/Marker Felt.ttf", 24);
+    auto label = Label::createWithTTF("スタートページ", "fonts/FGModernGothic.ttf", 24);
     label->setPosition(Vec2(
         visibleSize.width / 2,
         visibleSize.height / 2));
