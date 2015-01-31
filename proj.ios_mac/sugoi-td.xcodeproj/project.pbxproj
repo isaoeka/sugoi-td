@@ -13,6 +13,7 @@
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		261EC1F01A7CC95D00043CDE /* enemy in Resources */ = {isa = PBXBuildFile; fileRef = 261EC1EF1A7CC95D00043CDE /* enemy */; };
 		261EC1F31A7CD16B00043CDE /* MainGameScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 261EC1F11A7CD16B00043CDE /* MainGameScene.cpp */; };
+		261EC1F61A7CD31400043CDE /* SugoiEnemy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 261EC1F41A7CD31400043CDE /* SugoiEnemy.cpp */; };
 		288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
 		3EACC98F19EE6D4300EB3C5E /* res in Resources */ = {isa = PBXBuildFile; fileRef = 3EACC98E19EE6D4300EB3C5E /* res */; };
 		3EACC99019EE6D4300EB3C5E /* res in Resources */ = {isa = PBXBuildFile; fileRef = 3EACC98E19EE6D4300EB3C5E /* res */; };
@@ -110,6 +111,8 @@
 		261EC1EF1A7CC95D00043CDE /* enemy */ = {isa = PBXFileReference; lastKnownFileType = folder; path = enemy; sourceTree = "<group>"; };
 		261EC1F11A7CD16B00043CDE /* MainGameScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MainGameScene.cpp; sourceTree = "<group>"; };
 		261EC1F21A7CD16B00043CDE /* MainGameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainGameScene.h; sourceTree = "<group>"; };
+		261EC1F41A7CD31400043CDE /* SugoiEnemy.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SugoiEnemy.cpp; sourceTree = "<group>"; };
+		261EC1F51A7CD31400043CDE /* SugoiEnemy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SugoiEnemy.h; sourceTree = "<group>"; };
 		288765A40DF7441C002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		3EACC98E19EE6D4300EB3C5E /* res */ = {isa = PBXFileReference; lastKnownFileType = folder; path = res; sourceTree = "<group>"; };
 		46880B7619C43A67006E1F66 /* CloseNormal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CloseNormal.png; sourceTree = "<group>"; };
@@ -295,6 +298,8 @@
 				46880B8719C43A87006E1F66 /* StartPageScene.h */,
 				261EC1F11A7CD16B00043CDE /* MainGameScene.cpp */,
 				261EC1F21A7CD16B00043CDE /* MainGameScene.h */,
+				261EC1F41A7CD31400043CDE /* SugoiEnemy.cpp */,
+				261EC1F51A7CD31400043CDE /* SugoiEnemy.h */,
 			);
 			name = Classes;
 			path = ../Classes;
@@ -494,6 +499,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				261EC1F61A7CD31400043CDE /* SugoiEnemy.cpp in Sources */,
 				46880B8819C43A87006E1F66 /* AppDelegate.cpp in Sources */,
 				46880B8A19C43A87006E1F66 /* StartPageScene.cpp in Sources */,
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,

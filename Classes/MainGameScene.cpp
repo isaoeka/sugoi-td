@@ -1,4 +1,5 @@
 #include "MainGameScene.h"
+#include "SugoiEnemy.h"
 
 USING_NS_CC;
 
@@ -40,7 +41,8 @@ bool MainGameScene::init()
     this->addChild(label, 1);
 
     // add "HelloWorld" splash screen"
-    auto sprite = Sprite::create("enemy/3.png");
+    //    auto sprite = SugoiEnemy::create("enemy/3.png");
+    auto sprite = SugoiEnemy::create();
 
     // position the sprite on the center of the screen
     sprite->setPosition(Vec2(visibleSize.width / 2 + origin.x, visibleSize.height / 2 + origin.y));
