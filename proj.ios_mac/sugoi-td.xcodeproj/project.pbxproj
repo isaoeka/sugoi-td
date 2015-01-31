@@ -239,6 +239,26 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		261EC1F71A7CD81100043CDE /* Sprite */ = {
+			isa = PBXGroup;
+			children = (
+				261EC1F41A7CD31400043CDE /* SugoiEnemy.cpp */,
+				261EC1F51A7CD31400043CDE /* SugoiEnemy.h */,
+			);
+			name = Sprite;
+			sourceTree = "<group>";
+		};
+		261EC1F81A7CD84700043CDE /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+				46880B8619C43A87006E1F66 /* StartPageScene.cpp */,
+				46880B8719C43A87006E1F66 /* StartPageScene.h */,
+				261EC1F11A7CD16B00043CDE /* MainGameScene.cpp */,
+				261EC1F21A7CD16B00043CDE /* MainGameScene.h */,
+			);
+			name = Scene;
+			sourceTree = "<group>";
+		};
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
@@ -294,12 +314,8 @@
 			children = (
 				46880B8419C43A87006E1F66 /* AppDelegate.cpp */,
 				46880B8519C43A87006E1F66 /* AppDelegate.h */,
-				46880B8619C43A87006E1F66 /* StartPageScene.cpp */,
-				46880B8719C43A87006E1F66 /* StartPageScene.h */,
-				261EC1F11A7CD16B00043CDE /* MainGameScene.cpp */,
-				261EC1F21A7CD16B00043CDE /* MainGameScene.h */,
-				261EC1F41A7CD31400043CDE /* SugoiEnemy.cpp */,
-				261EC1F51A7CD31400043CDE /* SugoiEnemy.h */,
+				261EC1F81A7CD84700043CDE /* Scene */,
+				261EC1F71A7CD81100043CDE /* Sprite */,
 			);
 			name = Classes;
 			path = ../Classes;
