@@ -1,14 +1,14 @@
-#include "HelloWorldScene.h"
+#include "StartPageScene.h"
 
 USING_NS_CC;
 
-Scene* HelloWorld::createScene()
+Scene* StartPageScene::createScene()
 {
     // 'scene' is an autorelease object
     auto scene = Scene::create();
 
     // 'layer' is an autorelease object
-    auto layer = HelloWorld::create();
+    auto layer = StartPageScene::create();
 
     // add layer as a child to scene
     scene->addChild(layer);
@@ -18,7 +18,7 @@ Scene* HelloWorld::createScene()
 }
 
 // on "init" you need to initialize your instance
-bool HelloWorld::init()
+bool StartPageScene::init()
 {
     //////////////////////////////
     // 1. super init first
@@ -37,7 +37,7 @@ bool HelloWorld::init()
     auto closeItem = MenuItemImage::create(
         "enemy/1.png",
         "enemy/2.png",
-        CC_CALLBACK_1(HelloWorld::menuCloseCallback, this));
+        CC_CALLBACK_1(StartPageScene::myCallback, this));
 
     closeItem->setPosition(Vec2(origin.x + visibleSize.width - closeItem->getContentSize().width / 2,
         origin.y + closeItem->getContentSize().height / 2));
@@ -74,16 +74,19 @@ bool HelloWorld::init()
     return true;
 }
 
-void HelloWorld::menuCloseCallback(Ref* pSender)
+//-------------------------------------------------------------------
+#pragma mark -  callback
+//-------------------------------------------------------------------
+
+void StartPageScene::myCallback(Ref* pSender)
 {
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_WP8) || (CC_TARGET_PLATFORM == CC_PLATFORM_WINRT)
-    MessageBox("You pressed the close button. Windows Store Apps do not implement a close button.", "Alert");
-    return;
-#endif
+    log("タップされました。");
+}
 
-    Director::getInstance()->end();
-
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-    exit(0);
-#endif
+void StartPageScene::gameStart(int difficulty)
+{
+    auto scene = StartPageScene::createScene();
+    // 0.5秒かけてホワイトアウトしてタイトルに移動する
+    TransitionFade* fade = TransitionFade::create(0.5f, scene, Color3B::WHITE);
+    Director::getInstance()->replaceScene(fade);
 }
