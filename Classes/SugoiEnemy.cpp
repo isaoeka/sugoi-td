@@ -44,9 +44,11 @@ void SugoiEnemy::initOptions()
 
     fg_playing = true;
     mSpeed = arc4random() % 5 + 1;
-    mLifeCount = arc4random() % 4 + 1;
+    mLifeCount = arc4random() % 5 + 1;
+    mDelay = arc4random() % 120;
     log("[SugoiEnemy] speed : %d", mSpeed);
     log("[SugoiEnemy] life : %d", mLifeCount);
+    log("[SugoiEnemy] delay : %d", mDelay);
     initLifeCounter(mLifeCount);
 
     this->scheduleUpdate();
@@ -133,11 +135,16 @@ void SugoiEnemy::updateLifeCounter(int life)
 
 void SugoiEnemy::update(float frame)
 {
-    Vec2 pos = this->getPosition();
-    pos.x = pos.x - mSpeed;
-    this->setPosition(Vec2(
-        pos.x,
-        pos.y));
+    static float arema = 0;
+    arema += frame;
+
+    if ((int)arema > mDelay) {
+        Vec2 pos = this->getPosition();
+        pos.x = pos.x - mSpeed;
+        this->setPosition(Vec2(
+            pos.x,
+            pos.y));
+    }
 }
 
 void SugoiEnemy::timeUp()

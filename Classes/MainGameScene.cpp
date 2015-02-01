@@ -4,7 +4,7 @@
 using namespace CocosDenshion;
 
 #define SOUND_EFFECT "res/sound/powerdown07.mp3"
-#define ENEMY_COUNT 10
+#define ENEMY_COUNT 20
 
 USING_NS_CC;
 

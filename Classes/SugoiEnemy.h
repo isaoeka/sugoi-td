@@ -32,6 +32,7 @@ private:
 
     int mSpeed;
     int mLifeCount;
+    int mDelay;
 
     bool fg_playing;
 
