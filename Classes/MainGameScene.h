@@ -10,11 +10,12 @@ public:
     virtual bool init();
 
     // init
-    void initTimeCounter(float frame);
+    void initScoreCounter(float frame);
 
     void gameSetting(float frame);
     void gameStart(float frame);
     void gameOver(float frame);
+    void gameClear(float frame);
     void timeUp(float frame);
     void judgeUpdate(float frame);
     void updateScore(float frame);
@@ -29,7 +30,8 @@ public:
     CREATE_FUNC(MainGameScene);
 
 private:
-    cocos2d::Label* mScoreLabel;
+    cocos2d::Label* mTimeScoreLabel;
+    cocos2d::Label* mEnemyScoreLabel;
 
     //flag
     void initFlag();

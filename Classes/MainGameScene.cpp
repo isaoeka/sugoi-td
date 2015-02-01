@@ -4,6 +4,7 @@
 using namespace CocosDenshion;
 
 #define SOUND_EFFECT "res/sound/powerdown07.mp3"
+#define ENEMY_COUNT 10
 
 USING_NS_CC;
 
@@ -51,15 +52,20 @@ std::map<std::string, bool> getFlags()
     return boolMap;
 }
 
-void MainGameScene::initTimeCounter(float frame)
+void MainGameScene::initScoreCounter(float frame)
 {
     Size visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
     auto scoreString = String::createWithFormat("TIME : %.02f", frame);
-    mScoreLabel = Label::createWithTTF(scoreString->getCString(), "fonts/FGModernGothic.ttf", 40);
-    mScoreLabel->setPosition(Vec2(origin.x + visibleSize.width / 2, origin.y + visibleSize.height - mScoreLabel->getContentSize().height));
-    this->addChild(mScoreLabel, 3);
+    mTimeScoreLabel = Label::createWithTTF(scoreString->getCString(), "fonts/FGModernGothic.ttf", 40);
+    mTimeScoreLabel->setPosition(Vec2(100 + origin.x + visibleSize.width / 2, origin.y + visibleSize.height - mTimeScoreLabel->getContentSize().height));
+    this->addChild(mTimeScoreLabel, 3);
+
+    auto enemyString = String::createWithFormat("ENEMY : %d/%d", 0, ENEMY_COUNT);
+    mEnemyScoreLabel = Label::createWithTTF(enemyString->getCString(), "fonts/FGModernGothic.ttf", 40);
+    mEnemyScoreLabel->setPosition(Vec2(200, origin.y + visibleSize.height - mEnemyScoreLabel->getContentSize().height));
+    this->addChild(mEnemyScoreLabel, 30);
 
     this->schedule(schedule_selector(MainGameScene::updateScore));
     this->schedule(schedule_selector(MainGameScene::judgeUpdate));
@@ -71,8 +77,10 @@ void MainGameScene::initTimeCounter(float frame)
 
 void MainGameScene::gameSetting(float frame)
 {
+    //    this->removeAllChildren();
+
     // Enemy
-    while (mEnemys.size() < 10) {
+    while (mEnemys.size() < ENEMY_COUNT) {
         mEnemys.push_back(SugoiEnemy::create());
     }
 }
@@ -85,11 +93,30 @@ void MainGameScene::gameStart(float frame)
     //    auto actionManager = Director::getInstance()->getActionManager();
     scheduleOnce(schedule_selector(MainGameScene::timeUp), frame);
 
-    this->initTimeCounter((int)frame);
+    this->initScoreCounter((int)frame);
 
     for (SugoiEnemy* itl : mEnemys) {
         this->addChild(itl, 0);
     }
+}
+
+void MainGameScene::gameClear(float frame)
+{
+    this->unschedule(schedule_selector(MainGameScene::updateScore));
+    this->unschedule(schedule_selector(MainGameScene::judgeUpdate));
+    this->unscheduleUpdate();
+
+    fg_playing = false;
+    log("play Clear !!");
+
+    auto label = Label::createWithTTF("CLEAR!!", "fonts/FGModernGothic.ttf", 100);
+    Size visibleSize = Director::getInstance()->getVisibleSize();
+    label->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2));
+    this->addChild(label, 1);
+
+    mEnemys.clear();
+
+    this->gameSetting(1.1);
 }
 
 void MainGameScene::timeUp(float frame)
@@ -120,6 +147,8 @@ void MainGameScene::gameOver(float frame)
 
     SimpleAudioEngine::getInstance()->playEffect(SOUND_EFFECT);
     this->unschedule(schedule_selector(MainGameScene::updateScore));
+    this->unschedule(schedule_selector(MainGameScene::judgeUpdate));
+    this->unscheduleUpdate();
 
     auto label = Label::createWithTTF("GAMEOVER!!", "fonts/FGModernGothic.ttf", 100);
     Size visibleSize = Director::getInstance()->getVisibleSize();
@@ -142,12 +171,22 @@ std::vector<SugoiEnemy*> MainGameScene::getEnemys()
 
 void MainGameScene::judgeUpdate(float frame)
 {
+    int enemycount = 0;
     for (SugoiEnemy* itl : mEnemys) {
         Vec2 vec = itl->getPosition();
-        if (vec.x < 0 && fg_playing) {
+        if (vec.x < 0 && fg_playing && itl->isVisible()) {
             gameOver(1.0);
         }
+        else {
+            enemycount += !itl->isVisible() ? 1 : 0;
+            if (enemycount >= ENEMY_COUNT) {
+                gameClear(1.0);
+            }
+        }
     }
+    auto enemyString = String::createWithFormat("ENEMY : %d/%d", enemycount, ENEMY_COUNT);
+    mEnemyScoreLabel->setString(enemyString->getCString());
+    enemycount = 0;
 }
 
 void MainGameScene::updateScore(float frame)
@@ -160,6 +199,6 @@ void MainGameScene::updateScore(float frame)
     else {
         time = time - frame;
         auto scoreString = String::createWithFormat("TIME : %.02f", time);
-        mScoreLabel->setString(scoreString->getCString());
+        mTimeScoreLabel->setString(scoreString->getCString());
     }
 }
