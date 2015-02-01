@@ -47,6 +47,8 @@ bool MainGameScene::init()
     this->gameSetting(playtime);
     this->gameStart(playtime);
 
+    this->initJijin();
+
     return true;
 }
 
@@ -62,6 +64,28 @@ std::map<std::string, bool> getFlags()
     std::map<std::string, bool> boolMap;
 
     return boolMap;
+}
+
+void MainGameScene::initJijin()
+{
+    Size visibleSize = Director::getInstance()->getVisibleSize();
+    Vec2 origin = Director::getInstance()->getVisibleOrigin();
+
+    // Set an image to a texture, set the param "repeat"
+    Texture2D* bgTexture = Director::getInstance()->getTextureCache()->addImage("res/bg/jijin.png");
+    const Texture2D::TexParams tp = { GL_LINEAR, GL_LINEAR, GL_REPEAT, GL_REPEAT };
+    bgTexture->setTexParameters(tp);
+    // use the texture as Sprite
+    Sprite* background = Sprite::createWithTexture(bgTexture, Rect(0, 0, 200, visibleSize.height));
+    background->setPosition(Vec2(0, visibleSize.height / 2));
+
+    background->setGlobalZOrder(0);
+    this->addChild(background, 1);
+
+    auto label = Label::createWithTTF("す\nご\nい\nじ\nじ\nん", "fonts/FGModernGothic.ttf", 65);
+    label->setColor(Color3B(76, 76, 76));
+    label->setPosition(Vec2(150, visibleSize.height / 2));
+    background->addChild(label, 1);
 }
 
 void MainGameScene::initScoreCounter(float frame)

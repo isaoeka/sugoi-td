@@ -11,6 +11,7 @@ public:
 
     // init
     void initScoreCounter(float frame);
+    void initJijin();
 
     void gameSetting(float frame);
     void gameStart(float frame);
