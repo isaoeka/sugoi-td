@@ -41,9 +41,7 @@ bool StartPageScene::init()
     this->addChild(menu, 1);
 
     auto label = Label::createWithTTF("スタートページ", "fonts/FGModernGothic.ttf", 24);
-    label->setPosition(Vec2(
-        visibleSize.width / 2,
-        visibleSize.height / 2));
+    label->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2));
     this->addChild(label, 1);
 
     return true;

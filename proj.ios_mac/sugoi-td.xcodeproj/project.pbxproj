@@ -248,6 +248,13 @@
 			name = Scene;
 			sourceTree = "<group>";
 		};
+		2664B3E01A7DE44B00A4C810 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Manager;
+			sourceTree = "<group>";
+		};
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
@@ -300,6 +307,7 @@
 				46880B8419C43A87006E1F66 /* AppDelegate.cpp */,
 				46880B8519C43A87006E1F66 /* AppDelegate.h */,
 				261EC1F81A7CD84700043CDE /* Scene */,
+				2664B3E01A7DE44B00A4C810 /* Manager */,
 				261EC1F71A7CD81100043CDE /* Sprite */,
 			);
 			name = Classes;

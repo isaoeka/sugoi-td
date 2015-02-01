@@ -24,35 +24,48 @@ bool MainGameScene::init()
         return false;
     }
 
+    float playtime = 15.0f;
+
+    this->gameSetting(playtime);
+    this->gameStart(playtime);
+
+    return true;
+}
+
+void MainGameScene::initTimeCounter(float frame)
+{
     Size visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
-    auto label = Label::createWithTTF("ゲーム画面", "fonts/FGModernGothic.ttf", 24);
-    label->setPosition(Vec2(origin.x + visibleSize.width / 2,
-        origin.y + visibleSize.height - label->getContentSize().height));
-    this->addChild(label, 1);
+    auto scoreString = String::createWithFormat("TIME : %.02f", frame);
+    mScoreLabel = Label::createWithTTF(scoreString->getCString(), "fonts/FGModernGothic.ttf", 40);
+    mScoreLabel->setPosition(Vec2(origin.x + visibleSize.width / 2, origin.y + visibleSize.height - mScoreLabel->getContentSize().height));
+    this->addChild(mScoreLabel, 3);
 
-    //
-    while (mEnemys.size() < 30) {
-        mEnemys.push_back(SugoiEnemy::create());
-    }
-
-    for (SugoiEnemy* itl : mEnemys) {
-        this->addChild(itl, 0);
-    }
-
-    //    auto actionManager = Director::getInstance()->getActionManager();
-    scheduleOnce(schedule_selector(MainGameScene::timeUp), 15.0f);
-
-    return true;
+    this->schedule(schedule_selector(MainGameScene::updateScore));
 }
 
 //-------------------------------------------------------------------
 #pragma mark -  callback
 //-------------------------------------------------------------------
+void MainGameScene::gameSetting(float frame)
+{
+    // Enemy
+    while (mEnemys.size() < 30) {
+        mEnemys.push_back(SugoiEnemy::create());
+    }
+}
 
 void MainGameScene::gameStart(float frame)
 {
+    //    auto actionManager = Director::getInstance()->getActionManager();
+    scheduleOnce(schedule_selector(MainGameScene::timeUp), frame);
+
+    this->initTimeCounter((int)frame);
+
+    for (SugoiEnemy* itl : mEnemys) {
+        this->addChild(itl, 0);
+    }
 }
 
 void MainGameScene::timeUp(float frame)
@@ -67,4 +80,20 @@ void MainGameScene::timeUp(float frame)
 
 void MainGameScene::gameOver(float frame)
 {
+}
+
+void MainGameScene::updateScore(float frame)
+{
+    static float time = 15.0f;
+    if (time <= 0) {
+        // スケジュールの停止
+        this->unschedule(schedule_selector(MainGameScene::updateScore));
+    }
+    else {
+        time = time - frame;
+        log("ScoreTime : %f", time);
+
+        auto scoreString = String::createWithFormat("TIME : %.02f", time);
+        mScoreLabel->setString(scoreString->getCString());
+    }
 }
