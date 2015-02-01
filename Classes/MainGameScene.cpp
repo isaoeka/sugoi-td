@@ -30,8 +30,20 @@ bool MainGameScene::init()
         return false;
     }
 
-    float playtime = 15.0f;
+    Size visibleSize = Director::getInstance()->getVisibleSize();
+    Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
+    // Set an image to a texture, set the param "repeat"
+    Texture2D* bgTexture = Director::getInstance()->getTextureCache()->addImage("res/bg/bg.png");
+    const Texture2D::TexParams tp = { GL_LINEAR, GL_LINEAR, GL_REPEAT, GL_REPEAT };
+    bgTexture->setTexParameters(tp);
+    // use the texture as Sprite
+    Sprite* background = Sprite::createWithTexture(bgTexture, Rect(0, 0, visibleSize.width, visibleSize.height));
+    background->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2));
+    background->setGlobalZOrder(0);
+    this->addChild(background, 1);
+
+    float playtime = 15.0f;
     this->gameSetting(playtime);
     this->gameStart(playtime);
 
@@ -60,11 +72,13 @@ void MainGameScene::initScoreCounter(float frame)
     auto scoreString = String::createWithFormat("TIME : %.02f", frame);
     mTimeScoreLabel = Label::createWithTTF(scoreString->getCString(), "fonts/FGModernGothic.ttf", 40);
     mTimeScoreLabel->setPosition(Vec2(100 + origin.x + visibleSize.width / 2, origin.y + visibleSize.height - mTimeScoreLabel->getContentSize().height));
+    mTimeScoreLabel->setGlobalZOrder(20);
     this->addChild(mTimeScoreLabel, 3);
 
     auto enemyString = String::createWithFormat("ENEMY : %d/%d", 0, ENEMY_COUNT);
     mEnemyScoreLabel = Label::createWithTTF(enemyString->getCString(), "fonts/FGModernGothic.ttf", 40);
     mEnemyScoreLabel->setPosition(Vec2(200, origin.y + visibleSize.height - mEnemyScoreLabel->getContentSize().height));
+    mEnemyScoreLabel->setGlobalZOrder(20);
     this->addChild(mEnemyScoreLabel, 30);
 
     this->schedule(schedule_selector(MainGameScene::updateScore));
@@ -114,14 +128,14 @@ void MainGameScene::gameClear(float frame)
         "res/enemy/1.png",
         "res/enemy/2.png",
         CC_CALLBACK_1(MainGameScene::myCallback, this));
-    closeItem->setPosition(Vec2(origin.x + visibleSize.width - closeItem->getContentSize().width / 2,
-        origin.y + closeItem->getContentSize().height / 2));
+    closeItem->setPosition(Vec2(visibleSize.width / 2, origin.y + closeItem->getContentSize().height / 2 + 50));
     auto menu = Menu::create(closeItem, NULL);
     menu->setPosition(Vec2::ZERO);
     this->addChild(menu, 1);
 
     auto label = Label::createWithTTF("CLEAR!!", "fonts/FGModernGothic.ttf", 100);
     label->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2));
+    label->setGlobalZOrder(100);
     this->addChild(label, 1);
 
     mEnemys.clear();
@@ -129,8 +143,6 @@ void MainGameScene::gameClear(float frame)
 
 void MainGameScene::timeUp(float frame)
 {
-    fg_timeup = true;
-    fg_playing = false;
     log("time up !!");
 
     if (fg_playing) {
@@ -139,12 +151,16 @@ void MainGameScene::timeUp(float frame)
         auto label = Label::createWithTTF("TIMEUP!!", "fonts/FGModernGothic.ttf", 100);
         Size visibleSize = Director::getInstance()->getVisibleSize();
         label->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2));
+        label->setGlobalZOrder(100);
         this->addChild(label, 1);
 
         for (SugoiEnemy* itl : mEnemys) {
             itl->timeUp();
         }
     }
+
+    fg_timeup = true;
+    fg_playing = false;
 }
 
 void MainGameScene::gameOver(float frame)

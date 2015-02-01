@@ -40,8 +40,10 @@ SugoiEnemy* SugoiEnemy::create()
 
 void SugoiEnemy::initOptions()
 {
+    this->setGlobalZOrder(10);
+
     fg_playing = true;
-    mSpeed = arc4random() % 3 + 1;
+    mSpeed = arc4random() % 5 + 1;
     mLifeCount = arc4random() % 4 + 1;
     log("[SugoiEnemy] speed : %d", mSpeed);
     log("[SugoiEnemy] life : %d", mLifeCount);

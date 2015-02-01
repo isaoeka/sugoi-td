@@ -28,19 +28,29 @@ bool StartPageScene::init()
     Size visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
+    // Set an image to a texture, set the param "repeat"
+    Texture2D* bgTexture = Director::getInstance()->getTextureCache()->addImage("res/bg/bg.png");
+    const Texture2D::TexParams tp = { GL_LINEAR, GL_LINEAR, GL_REPEAT, GL_REPEAT };
+    bgTexture->setTexParameters(tp);
+
+    // use the texture as Sprite
+    Sprite* background = Sprite::createWithTexture(bgTexture, Rect(0, 0, visibleSize.width, visibleSize.height));
+    background->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2));
+    this->addChild(background, 1);
+
     auto closeItem = MenuItemImage::create(
-        "res/enemy/1.png",
-        "res/enemy/2.png",
+        "res/ui/btn_start.png",
+        "res/ui/btn_start_on.png",
         CC_CALLBACK_1(StartPageScene::myCallback, this));
 
-    closeItem->setPosition(Vec2(origin.x + visibleSize.width - closeItem->getContentSize().width / 2,
-        origin.y + closeItem->getContentSize().height / 2));
+    closeItem->setPosition(Vec2(visibleSize.width / 2, origin.y + closeItem->getContentSize().height / 2 + 50));
 
     auto menu = Menu::create(closeItem, NULL);
     menu->setPosition(Vec2::ZERO);
     this->addChild(menu, 1);
 
-    auto label = Label::createWithTTF("スタートページ", "fonts/FGModernGothic.ttf", 24);
+    auto label = Label::createWithTTF("すごいTD", "fonts/FGModernGothic.ttf", 250);
+    label->setColor(Color3B(76, 76, 76));
     label->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2));
     this->addChild(label, 1);
 
