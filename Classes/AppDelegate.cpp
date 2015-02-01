@@ -4,7 +4,6 @@
 
 USING_NS_CC;
 
-// SimpleAudioEngine用にこれも。
 using namespace CocosDenshion;
 
 AppDelegate::AppDelegate()

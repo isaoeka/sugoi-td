@@ -7,10 +7,16 @@
 //
 
 #include "SugoiEnemy.h"
+#include "SimpleAudioEngine.h"
 
 using namespace cocos2d;
+using namespace CocosDenshion;
 
-SugoiEnemy::SugoiEnemy() {}
+#define SOUND_EFFECT "res/sound/coin05.mp3"
+
+SugoiEnemy::SugoiEnemy()
+{
+}
 
 SugoiEnemy::~SugoiEnemy() {}
 
@@ -80,13 +86,13 @@ void SugoiEnemy::addEvents()
 
 void SugoiEnemy::touchEvent(cocos2d::Touch* touch)
 {
+    SimpleAudioEngine::getInstance()->playEffect(SOUND_EFFECT);
 
     // タップしたら消去
     this->removeFromParentAndCleanup(true);
 }
 
 // 実装
-// this->scheduleUpdate()を実行するとフレーム単位で以下が自動的に呼ばれるようになる
 void SugoiEnemy::update(float frame)
 {
     Vec2 pos = this->getPosition();
@@ -94,7 +100,4 @@ void SugoiEnemy::update(float frame)
     this->setPosition(Vec2(
         pos.x,
         pos.y));
-
-    //    log("[SugoiEnemy] frame is %f", frame);
-    //    log("[SugoiEnemy] pos %f:%f", pos.x, pos.y);
 }
