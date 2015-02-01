@@ -22,14 +22,20 @@ public:
     void touchEvent(cocos2d::Touch* touch);
 
     void timeUp();
+    void sinu();
+
+    void initLifeCounter(int life);
+    void updateLifeCounter(int life);
 
 private:
     void update(float frame);
 
     int mSpeed;
     int mLifeCount;
-    
+
     bool fg_playing;
+
+    cocos2d::Label* mLifeLabel;
 };
 
 #endif /* defined(__sugoi_td__SugoiEnemy__) */

@@ -42,8 +42,10 @@ void SugoiEnemy::initOptions()
 {
     fg_playing = true;
     mSpeed = arc4random() % 3 + 1;
-    log("[sugoienemy] create!");
+    mLifeCount = arc4random() % 4 + 1;
     log("[SugoiEnemy] speed : %d", mSpeed);
+    log("[SugoiEnemy] life : %d", mLifeCount);
+    initLifeCounter(mLifeCount);
 
     this->scheduleUpdate();
     // do things here like setTag(), setPosition(), any custom logic.
@@ -87,11 +89,37 @@ void SugoiEnemy::addEvents()
 void SugoiEnemy::touchEvent(cocos2d::Touch* touch)
 {
     if (this->isVisible() && fg_playing) {
-        SimpleAudioEngine::getInstance()->playEffect(SOUND_EFFECT);
-
-        // 非表示
-        this->setVisible(false);
+        mLifeCount--;
+        updateLifeCounter(mLifeCount);
+        if (0 >= mLifeCount) {
+            this->sinu();
+        }
     }
+}
+
+void SugoiEnemy::sinu()
+{
+    SimpleAudioEngine::getInstance()->playEffect(SOUND_EFFECT);
+    this->setVisible(false);
+}
+
+void SugoiEnemy::initLifeCounter(int life)
+{
+    auto lifetexturename = String::createWithFormat("res/enemy/%d.png", life);
+    this->setTexture(lifetexturename->getCString());
+
+    //    Size visibleSize = Director::getInstance()->getVisibleSize();
+    //    Vec2 origin = Director::getInstance()->getVisibleOrigin();
+    //    auto scoreString = String::createWithFormat("[%d]", life);
+    //    mLifeLabel = Label::createWithTTF(scoreString->getCString(), "fonts/FGModernGothic.ttf", 30);
+    //    mLifeLabel->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2));
+    //    this->addChild(mLifeLabel, 3);
+}
+
+void SugoiEnemy::updateLifeCounter(int life)
+{
+    auto lifetexturename = String::createWithFormat("res/enemy/%d.png", life);
+    this->setTexture(lifetexturename->getCString());
 }
 
 void SugoiEnemy::update(float frame)

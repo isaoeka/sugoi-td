@@ -72,7 +72,7 @@ void MainGameScene::initTimeCounter(float frame)
 void MainGameScene::gameSetting(float frame)
 {
     // Enemy
-    while (mEnemys.size() < 30) {
+    while (mEnemys.size() < 10) {
         mEnemys.push_back(SugoiEnemy::create());
     }
 }
