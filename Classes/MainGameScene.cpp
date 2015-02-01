@@ -105,6 +105,10 @@ void MainGameScene::timeUp(float frame)
         Size visibleSize = Director::getInstance()->getVisibleSize();
         label->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2));
         this->addChild(label, 1);
+
+        for (SugoiEnemy* itl : mEnemys) {
+            itl->timeUp();
+        }
     }
 }
 
@@ -120,6 +124,10 @@ void MainGameScene::gameOver(float frame)
     Size visibleSize = Director::getInstance()->getVisibleSize();
     label->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2));
     this->addChild(label, 2);
+
+    for (SugoiEnemy* itl : mEnemys) {
+        itl->timeUp();
+    }
 }
 
 std::vector<SugoiEnemy*> MainGameScene::getEnemys()
