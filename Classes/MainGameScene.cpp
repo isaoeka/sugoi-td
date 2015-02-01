@@ -1,4 +1,9 @@
 #include "MainGameScene.h"
+#include "SimpleAudioEngine.h"
+
+using namespace CocosDenshion;
+
+#define SOUND_EFFECT "res/sound/powerdown07.mp3"
 
 USING_NS_CC;
 
@@ -72,7 +77,9 @@ void MainGameScene::timeUp(float frame)
 {
     log("time up !!");
 
-    auto label = Label::createWithTTF("タイムアップ！", "fonts/FGModernGothic.ttf", 100);
+    SimpleAudioEngine::getInstance()->playEffect(SOUND_EFFECT);
+
+    auto label = Label::createWithTTF("TIMEUP!!", "fonts/FGModernGothic.ttf", 100);
     Size visibleSize = Director::getInstance()->getVisibleSize();
     label->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2));
     this->addChild(label, 1);
@@ -80,6 +87,10 @@ void MainGameScene::timeUp(float frame)
 
 void MainGameScene::gameOver(float frame)
 {
+    auto label = Label::createWithTTF("GAMEOVER!!", "fonts/FGModernGothic.ttf", 100);
+    Size visibleSize = Director::getInstance()->getVisibleSize();
+    label->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2));
+    this->addChild(label, 2);
 }
 
 void MainGameScene::updateScore(float frame)
