@@ -29,8 +29,8 @@ bool StartPageScene::init()
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
     auto closeItem = MenuItemImage::create(
-        "enemy/1.png",
-        "enemy/2.png",
+        "res/enemy/1.png",
+        "res/enemy/2.png",
         CC_CALLBACK_1(StartPageScene::myCallback, this));
 
     closeItem->setPosition(Vec2(origin.x + visibleSize.width - closeItem->getContentSize().width / 2,

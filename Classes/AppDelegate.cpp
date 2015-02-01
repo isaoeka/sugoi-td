@@ -1,7 +1,11 @@
 #include "AppDelegate.h"
 #include "StartPageScene.h"
+#include "SimpleAudioEngine.h"
 
 USING_NS_CC;
+
+// SimpleAudioEngine用にこれも。
+using namespace CocosDenshion;
 
 AppDelegate::AppDelegate()
 {
@@ -36,6 +40,9 @@ bool AppDelegate::applicationDidFinishLaunching()
 
     // create a scene. it's an autorelease object
     auto scene = StartPageScene::createScene();
+
+    // BGMの場合
+    SimpleAudioEngine::getInstance()->playBackgroundMusic("res/sound/rinsen.mp3", true);
 
     // run
     director->runWithScene(scene);

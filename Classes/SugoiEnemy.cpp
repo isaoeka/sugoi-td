@@ -18,7 +18,7 @@ SugoiEnemy* SugoiEnemy::create()
 {
     SugoiEnemy* pSprite = new SugoiEnemy();
 
-    if (pSprite->initWithFile("enemy/4.png")) {
+    if (pSprite->initWithFile("res/enemy/4.png")) {
         pSprite->autorelease();
 
         pSprite->initOptions();
@@ -80,6 +80,7 @@ void SugoiEnemy::addEvents()
 
 void SugoiEnemy::touchEvent(cocos2d::Touch* touch)
 {
+
     // タップしたら消去
     this->removeFromParentAndCleanup(true);
 }

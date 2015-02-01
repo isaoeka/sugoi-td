@@ -25,6 +25,7 @@ private:
     void update(float frame);
 
     int mSpeed;
+    int lifeCount;
 };
 
 #endif /* defined(__sugoi_td__SugoiEnemy__) */
