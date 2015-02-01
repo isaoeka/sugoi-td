@@ -119,6 +119,7 @@ void MainGameScene::gameOver(float frame)
     log("gema over !!");
 
     SimpleAudioEngine::getInstance()->playEffect(SOUND_EFFECT);
+    this->unschedule(schedule_selector(MainGameScene::updateScore));
 
     auto label = Label::createWithTTF("GAMEOVER!!", "fonts/FGModernGothic.ttf", 100);
     Size visibleSize = Director::getInstance()->getVisibleSize();
