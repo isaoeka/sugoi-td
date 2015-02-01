@@ -77,8 +77,6 @@ void MainGameScene::initScoreCounter(float frame)
 
 void MainGameScene::gameSetting(float frame)
 {
-    //    this->removeAllChildren();
-
     // Enemy
     while (mEnemys.size() < ENEMY_COUNT) {
         mEnemys.push_back(SugoiEnemy::create());
@@ -109,14 +107,24 @@ void MainGameScene::gameClear(float frame)
     fg_playing = false;
     log("play Clear !!");
 
-    auto label = Label::createWithTTF("CLEAR!!", "fonts/FGModernGothic.ttf", 100);
     Size visibleSize = Director::getInstance()->getVisibleSize();
+    Vec2 origin = Director::getInstance()->getVisibleOrigin();
+
+    auto closeItem = MenuItemImage::create(
+        "res/enemy/1.png",
+        "res/enemy/2.png",
+        CC_CALLBACK_1(MainGameScene::myCallback, this));
+    closeItem->setPosition(Vec2(origin.x + visibleSize.width - closeItem->getContentSize().width / 2,
+        origin.y + closeItem->getContentSize().height / 2));
+    auto menu = Menu::create(closeItem, NULL);
+    menu->setPosition(Vec2::ZERO);
+    this->addChild(menu, 1);
+
+    auto label = Label::createWithTTF("CLEAR!!", "fonts/FGModernGothic.ttf", 100);
     label->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2));
     this->addChild(label, 1);
 
     mEnemys.clear();
-
-    this->gameSetting(1.1);
 }
 
 void MainGameScene::timeUp(float frame)
@@ -163,6 +171,14 @@ void MainGameScene::gameOver(float frame)
 std::vector<SugoiEnemy*> MainGameScene::getEnemys()
 {
     return mEnemys;
+}
+
+void MainGameScene::myCallback(Ref* pSender)
+{
+    this->removeAllChildren();
+
+    this->gameSetting(1.1);
+    this->gameStart(15.0);
 }
 
 //-------------------------------------------------------------------

@@ -20,6 +20,8 @@ public:
     void judgeUpdate(float frame);
     void updateScore(float frame);
 
+    void myCallback(cocos2d::Ref* pSender);
+
     // enemys
     std::vector<SugoiEnemy*> mEnemys;
     std::vector<SugoiEnemy*> getEnemys();
