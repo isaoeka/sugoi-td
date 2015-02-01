@@ -52,7 +52,6 @@ void SugoiEnemy::initOptions()
     Size visibleSize = Director::getInstance()->getVisibleSize();
     Point origin = Director::getInstance()->getVisibleOrigin(); //—端末左下の座標を取得
     Vec2 cs = this->getContentSize();
-
     int randomNum = arc4random() % (int)visibleSize.height;
     log("[SugoiEnemy] pos height randum : %d", randomNum);
     this->setPosition(Vec2(visibleSize.width + cs.x, randomNum));
@@ -86,10 +85,12 @@ void SugoiEnemy::addEvents()
 
 void SugoiEnemy::touchEvent(cocos2d::Touch* touch)
 {
-    SimpleAudioEngine::getInstance()->playEffect(SOUND_EFFECT);
+    if (this->isVisible()) {
+        SimpleAudioEngine::getInstance()->playEffect(SOUND_EFFECT);
 
-    // 消去
-    this->removeFromParentAndCleanup(true);
+        // 非表示
+        this->setVisible(false);
+    }
 }
 
 void SugoiEnemy::update(float frame)
