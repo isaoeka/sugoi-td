@@ -28,6 +28,8 @@ private:
 
     int mSpeed;
     int mLifeCount;
+    
+    bool fg_playing;
 };
 
 #endif /* defined(__sugoi_td__SugoiEnemy__) */

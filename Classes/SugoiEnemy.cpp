@@ -40,6 +40,7 @@ SugoiEnemy* SugoiEnemy::create()
 
 void SugoiEnemy::initOptions()
 {
+    fg_playing = true;
     mSpeed = arc4random() % 3 + 1;
     log("[sugoienemy] create!");
     log("[SugoiEnemy] speed : %d", mSpeed);
@@ -85,7 +86,7 @@ void SugoiEnemy::addEvents()
 
 void SugoiEnemy::touchEvent(cocos2d::Touch* touch)
 {
-    if (this->isVisible()) {
+    if (this->isVisible() && fg_playing) {
         SimpleAudioEngine::getInstance()->playEffect(SOUND_EFFECT);
 
         // 非表示
@@ -105,4 +106,5 @@ void SugoiEnemy::update(float frame)
 void SugoiEnemy::timeUp()
 {
     this->unscheduleUpdate();
+    fg_playing = false;
 }
