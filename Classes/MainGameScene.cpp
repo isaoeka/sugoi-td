@@ -33,10 +33,18 @@ bool MainGameScene::init()
         origin.y + visibleSize.height - label->getContentSize().height));
     this->addChild(label, 1);
 
+    std::vector<SugoiEnemy*> enemys;
     //
-    auto sprite = SugoiEnemy::create();
-    sprite->setPosition(Vec2(visibleSize.width / 2 + origin.x, visibleSize.height / 2 + origin.y));
-    this->addChild(sprite, 0);
+    while (enemys.size() < 30) {
+        enemys.push_back(SugoiEnemy::create());
+    }
+
+    for (SugoiEnemy* itl : enemys) {
+        this->addChild(itl, 0);
+    }
+
+    //    auto actionManager = Director::getInstance()->getActionManager();
+    scheduleOnce(schedule_selector(MainGameScene::timeUp), 15.0f);
 
     return true;
 }
@@ -44,3 +52,16 @@ bool MainGameScene::init()
 //-------------------------------------------------------------------
 #pragma mark -  callback
 //-------------------------------------------------------------------
+
+void MainGameScene::gameStart(float frame)
+{
+}
+
+void MainGameScene::timeUp(float frame)
+{
+    log("time up !!");
+}
+
+void MainGameScene::gameOver(float frame)
+{
+}

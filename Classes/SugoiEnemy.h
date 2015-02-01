@@ -18,11 +18,13 @@ public:
     static SugoiEnemy* create();
 
     void initOptions();
-
     void addEvents();
     void touchEvent(cocos2d::Touch* touch);
 
 private:
+    void update(float frame);
+
+    int mSpeed;
 };
 
 #endif /* defined(__sugoi_td__SugoiEnemy__) */
