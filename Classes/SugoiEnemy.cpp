@@ -93,10 +93,17 @@ void SugoiEnemy::touchEvent(cocos2d::Touch* touch)
     if (this->isVisible() && fg_playing) {
         mLifeCount--;
         updateLifeCounter(mLifeCount);
+
+        //アニメーションを作成　ScaleTo::create(時間, 比率);
+        auto action = ScaleBy::create(0.1, 1.1);
+        this->runAction(action);
+
         if (0 >= mLifeCount) {
             this->sinu();
         }
     }
+    auto action = ScaleBy::create(0.1, 0.9);
+    this->runAction(action);
 }
 
 void SugoiEnemy::sinu()
