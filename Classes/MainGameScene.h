@@ -2,6 +2,7 @@
 #define __MainGameScene_SCENE_H__
 
 #include "cocos2d.h"
+#include "SugoiEnemy.h"
 
 class MainGameScene : public cocos2d::Layer {
 public:
@@ -14,6 +15,9 @@ public:
     void gameStart(float frame);
     void timeUp(float frame);
     void gameOver(float frame);
+
+    // enemys
+    std::vector<SugoiEnemy*> mEnemys;
 
     // implement the "static create()" method manually
     CREATE_FUNC(MainGameScene);

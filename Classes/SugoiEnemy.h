@@ -21,6 +21,8 @@ public:
     void addEvents();
     void touchEvent(cocos2d::Touch* touch);
 
+    void timeUp();
+
 private:
     void update(float frame);
 

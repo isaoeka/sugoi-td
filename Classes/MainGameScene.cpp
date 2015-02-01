@@ -1,5 +1,4 @@
 #include "MainGameScene.h"
-#include "SugoiEnemy.h"
 
 USING_NS_CC;
 
@@ -33,13 +32,12 @@ bool MainGameScene::init()
         origin.y + visibleSize.height - label->getContentSize().height));
     this->addChild(label, 1);
 
-    std::vector<SugoiEnemy*> enemys;
     //
-    while (enemys.size() < 30) {
-        enemys.push_back(SugoiEnemy::create());
+    while (mEnemys.size() < 30) {
+        mEnemys.push_back(SugoiEnemy::create());
     }
 
-    for (SugoiEnemy* itl : enemys) {
+    for (SugoiEnemy* itl : mEnemys) {
         this->addChild(itl, 0);
     }
 
@@ -60,6 +58,11 @@ void MainGameScene::gameStart(float frame)
 void MainGameScene::timeUp(float frame)
 {
     log("time up !!");
+
+    auto label = Label::createWithTTF("タイムアップ！", "fonts/FGModernGothic.ttf", 100);
+    Size visibleSize = Director::getInstance()->getVisibleSize();
+    label->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2));
+    this->addChild(label, 1);
 }
 
 void MainGameScene::gameOver(float frame)

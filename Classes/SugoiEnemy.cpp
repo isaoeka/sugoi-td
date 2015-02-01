@@ -88,11 +88,10 @@ void SugoiEnemy::touchEvent(cocos2d::Touch* touch)
 {
     SimpleAudioEngine::getInstance()->playEffect(SOUND_EFFECT);
 
-    // タップしたら消去
+    // 消去
     this->removeFromParentAndCleanup(true);
 }
 
-// 実装
 void SugoiEnemy::update(float frame)
 {
     Vec2 pos = this->getPosition();
@@ -100,4 +99,9 @@ void SugoiEnemy::update(float frame)
     this->setPosition(Vec2(
         pos.x,
         pos.y));
+}
+
+void SugoiEnemy::timeUp()
+{
+    this->unscheduleUpdate();
 }
